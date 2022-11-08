@@ -5,7 +5,7 @@ const app = require('../lib/app');
 const { books } = require('../lib/books-data');
 const { authors } = require('../lib/author-data');
 
-describe('books routes', () => {
+describe('app routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
@@ -29,7 +29,7 @@ describe('books routes', () => {
     const res = await request(app).get('/authors');
 
     const expected = authors.map((author) => {
-      return { id: author.id, name: author.name };
+      return { id: author.id, name: author.name, dob: author.dob, pob: author.pob, books: author.books };
     });
 
     expect(res.body).toEqual(expected);
