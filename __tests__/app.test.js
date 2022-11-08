@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const { books } = require('../lib/books-data');
+const { authors } = require('../lib/author-data');
 
 describe('books routes', () => {
   beforeEach(() => {
@@ -13,7 +14,22 @@ describe('books routes', () => {
     const res = await request(app).get('/books');
 
     const expected = books.map((book) => {
-      return { id: book.id, title: book.title, author: book.author, published: book.published };
+      return {
+        id: book.id,
+        title: book.title,
+        author: book.author,
+        published: book.published,
+      };
+    });
+
+    expect(res.body).toEqual(expected);
+  });
+
+  it('/authors should return a list of authors', async () => {
+    const res = await request(app).get('/authors');
+
+    const expected = authors.map((author) => {
+      return { id: author.id, name: author.name };
     });
 
     expect(res.body).toEqual(expected);
