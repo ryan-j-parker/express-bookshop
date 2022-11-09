@@ -29,7 +29,7 @@ describe('app routes', () => {
     const res = await request(app).get('/authors');
 
     const expected = authors.map((author) => {
-      return { id: author.id, name: author.name, dob: author.dob, pob: author.pob, books: author.books };
+      return { id: author.id, name: author.name, dob: author.dob, pob: author.pob };
     });
 
     expect(res.body).toEqual(expected);

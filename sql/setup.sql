@@ -1,9 +1,11 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
+DROP TABLE IF EXISTS authors_books;
 DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS authors;
 
 CREATE TABLE books (
-    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR NOT NULL,
     author VARCHAR NOT NULL,
     published INT NOT NULL
@@ -32,35 +34,64 @@ VALUES
 ('Multi-channelled neutral secured line', 'Thane Taye', 2212),
 ('Optional even-keeled open system', 'Anthe Ormston', 2106);
 
-DROP TABLE IF EXISTS authors;
-
 CREATE TABLE authors (
-    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR NOT NULL,
     dob VARCHAR NOT NULL,
-    pob VARCHAR NOT NULL,
-    books VARCHAR NOT NULL
+    pob VARCHAR NOT NULL
 );
 
-INSERT INTO authors (name, dob, pob, books)
+INSERT INTO authors (name, dob, pob)
 VALUES
-('Albertine Jeffries', '1979-08-22', 'Canada', 'Fully-configurable foreground project'),
-('Gran Cheake', '1989-11-14', 'Burma', 'Adaptive bifurcated encoding'),
-('Arleen MacAindreis', '1987-09-12', 'France', 'Mandatory stable pricing structure'),
-('Mercie Savery', '1992-04-05', 'Thailand', 'Balanced 24/7 ability'),
-('Minna Nockells', '1996-02-01', 'Japan', 'Sharable needs-based instruction set'),
-('Catha Ocurrane', '1997-03-12', 'Oahu', 'Distributed upward-trending alliance'),
-('Devonna Philp', '1991-05-16', 'Russia', 'Intuitive reciprocal orchestration'),
-('Reinwald Fleeman', '1987-08-22', 'Spain', 'Configurable intermediate circuit'),
-('Catharine Ormeilly', '2144-09-18', 'Scotland', 'Assimilated multi-tasking matrices'),
-('Coralyn Thorowgood', '2198-06-19', 'Kosovo', 'Expanded grid-enabled methodology'),
-('Garrek Jutson', '1986-03-12', 'Mongolia', 'Persevering discrete parallelism'),
-('Rebe Johnston', '1998-02-12', 'Vietnam', 'Robust intermediate process improvement'),
-('Elsie MacDuff', '1984-12-05', 'Norway', 'Reverse-engineered 5th generation open architecture'),
-('Cooper Wharf', '1997-08-22', 'Nepal', 'Cross-platform hybrid hardware'),
-('Henrie Batrip', '2004-07-19', 'Macedonia', 'Enhanced discrete data-warehouse'),
-('Berton Dymock', '2027-03-12', 'Pakistan', 'Stand-alone systemic success'),
-('Lanie Hurler', '1977-04-09', 'Colombia', 'Realigned multi-state complexity'),
-('Ianthe Crackel', '1987-06-23', 'Ohio', 'Customizable dynamic internet solution'),
-('Thane Taye', '2188-04-19', 'Mars', 'Multi-channelled neutral secured line'),
-('Anthe Ormston', '2084-12-01', 'New Tokyo', 'Optional even-keeled open system');
+('Albertine Jeffries', '1979-08-22', 'Canada'),
+('Gran Cheake', '1989-11-14', 'Burma'),
+('Arleen MacAindreis', '1987-09-12', 'France'),
+('Mercie Savery', '1992-04-05', 'Thailand'),
+('Minna Nockells', '1996-02-01', 'Japan'),
+('Catha Ocurrane', '1997-03-12', 'Oahu'),
+('Devonna Philp', '1991-05-16', 'Russia'),
+('Reinwald Fleeman', '1987-08-22', 'Spain'),
+('Catharine Ormeilly', '2144-09-18', 'Scotland'),
+('Coralyn Thorowgood', '2198-06-19', 'Kosovo'),
+('Garrek Jutson', '1986-03-12', 'Mongolia'),
+('Rebe Johnston', '1998-02-12', 'Vietnam'),
+('Elsie MacDuff', '1984-12-05', 'Norway'),
+('Cooper Wharf', '1997-08-22', 'Nepal'),
+('Henrie Batrip', '2004-07-19', 'Macedonia'),
+('Berton Dymock', '2027-03-12', 'Pakistan'),
+('Lanie Hurler', '1977-04-09', 'Colombia'),
+('Ianthe Crackel', '1987-06-23', 'Ohio'),
+('Thane Taye', '2188-04-19', 'Mars'),
+('Anthe Ormston', '2084-12-01', 'New Tokyo');
+
+CREATE TABLE authors_books (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    author_id BIGINT,
+    book_id BIGINT,
+    FOREIGN KEY (author_id) REFERENCES authors(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+INSERT INTO
+    authors_books (author_id, book_id)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10),
+(11, 11),
+(12, 12),
+(13, 13),
+(14, 14),
+(15, 15),
+(16, 16),
+(17, 17),
+(18, 18),
+(19, 19),
+(20, 20);
