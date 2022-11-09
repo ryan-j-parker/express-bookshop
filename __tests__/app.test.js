@@ -27,19 +27,17 @@ describe('app routes', () => {
 
   it('/books/:id should return a book by ID', async () => {
     const res = await request(app).get('/books/1');
-    const configurable = {
-      id: '1',
-      name: 'Fully-configurable foreground project',
-      author: 'Albertine Jeffries',
-      published: 2004,
-      authors: [{
-        id: '1',
-        name: 'Albertine Jeffries',
-        dob: '1979-08-22',
-        pob: 'Canada'
-      }]
+    const expected = {
+      title: expect.any(String),
+      published: expect.any(Number),
+      authors: [
+        {
+          id: expect.any(Number),
+          name: expect.any(String),
+        },
+      ],
     };
-    expect(res.body).toEqual(configurable);
+    expect(res.body).toEqual(expected);
   });
 
   it('/authors should return a list of authors', async () => {
@@ -54,7 +52,7 @@ describe('app routes', () => {
 
   it('/authors/:id should return an author by ID', async () => {
     const res = await request(app).get('/authors/1');
-    const jeffries = {
+    const expected = {
       id: '1',
       name: 'Albertine Jeffries',
       dob: '1979-08-22',
@@ -68,7 +66,7 @@ describe('app routes', () => {
         },
       ],
     };
-    expect(res.body).toEqual(jeffries);
+    expect(res.body).toEqual(expected);
   });
 
   afterAll(() => {
