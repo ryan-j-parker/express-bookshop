@@ -25,6 +25,23 @@ describe('app routes', () => {
     expect(res.body).toEqual(expected);
   });
 
+  it('/books/:id should return a book by ID', async () => {
+    const res = await request(app).get('/books/1');
+    const configurable = {
+      id: '1',
+      name: 'Fully-configurable foreground project',
+      author: 'Albertine Jeffries',
+      published: 2004,
+      authors: [{
+        id: '1',
+        name: 'Albertine Jeffries',
+        dob: '1979-08-22',
+        pob: 'Canada'
+      }]
+    };
+    expect(res.body).toEqual(configurable);
+  });
+
   it('/authors should return a list of authors', async () => {
     const res = await request(app).get('/authors');
 
