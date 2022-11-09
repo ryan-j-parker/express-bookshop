@@ -53,16 +53,14 @@ describe('app routes', () => {
   it('/authors/:id should return an author by ID', async () => {
     const res = await request(app).get('/authors/1');
     const expected = {
-      id: '1',
-      name: 'Albertine Jeffries',
-      dob: '1979-08-22',
-      pob: 'Canada',
+      name: expect.any(String),
+      dob: expect.any(String),
+      pob: expect.any(String),
       books: [
         {
           id: 1,
-          title: 'Fully-configurable foreground project',
-          author: 'Albertine Jeffries',
-          published: 2004,
+          title: expect.any(String),
+          published: expect.any(Number),
         },
       ],
     };
