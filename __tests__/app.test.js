@@ -29,10 +29,29 @@ describe('app routes', () => {
     const res = await request(app).get('/authors');
 
     const expected = authors.map((author) => {
-      return { id: author.id, name: author.name, dob: author.dob, pob: author.pob };
+      return { id: author.id, name: author.name };
     });
 
     expect(res.body).toEqual(expected);
+  });
+
+  it('/authors/:id should return an author by ID', async () => {
+    const res = await request(app).get('/authors/1');
+    const jeffries = {
+      id: '1',
+      name: 'Albertine Jeffries',
+      dob: '1979-08-22',
+      pob: 'Canada',
+      books: [
+        {
+          id: 1,
+          title: 'Fully-configurable foreground project',
+          author: 'Albertine Jeffries',
+          published: 2004,
+        },
+      ],
+    };
+    expect(res.body).toEqual(jeffries);
   });
 
   afterAll(() => {
